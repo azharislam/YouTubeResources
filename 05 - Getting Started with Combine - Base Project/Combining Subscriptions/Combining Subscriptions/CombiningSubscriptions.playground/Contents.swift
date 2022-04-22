@@ -11,6 +11,30 @@ let people: Publishers.Sequence<[String?], Never> = ["Tunde", "Bob", "Toyo", "Ja
 
 // Never = never fails
 
+enum PersonError: Error {
+    case emptyData
+}
+
+extension PersonError {
+    
+    public var errorDescription: String {
+        switch self {
+        case .emptyData:
+            return "There is a nil value somewhere"
+        }
+    }
+}
+
+func validate(person: String?, meal: String?) throws -> String {
+    
+    guard let person = person,
+          let meal = meal else {
+        throw PersonError.emptyData
+    }
+    
+    return "\(person) \(meal)"
+    
+}
 let subscription = people
     .zip(meals) // Combine meals and people
     .filter({ $0 != nil && $1 != nil}) // Filter out the nils
