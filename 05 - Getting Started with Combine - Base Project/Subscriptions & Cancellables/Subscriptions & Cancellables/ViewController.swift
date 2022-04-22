@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
 
@@ -49,6 +50,8 @@ class ViewController: UIViewController {
         stackVw.translatesAutoresizingMaskIntoConstraints = false
         return stackVw
     }()
+    
+    private var subscription: AnyCancellable?
         
     override func loadView() {
         super.loadView()
@@ -58,12 +61,25 @@ class ViewController: UIViewController {
     @objc
     func startTimer() {
         print("Start")
+        subscription = Timer // Store our timer in a subscription
+            .publish(every: 1, on: .main, in: .common) // Run the timer every 1 second on the main thread
+            .autoconnect() // Connects our timer to the publisher so we can listen to changes
+            .scan(0, { (count, _) in // Scan from 0, increment seconds by 1
+                return count + 1
+            })
+            .sink(receiveCompletion: { _ in // Sink is when you want to get final value out of subscription
+                print("Finished") // Completion finished
+            }, receiveValue: { [weak self] count in // Value in subscription changes
+                print("Updating the label to the current value: \(count.format)") // When the count changes
+                self?.countLbl.text = count.format // Assign label to the new time format
+            })
         
     }
     
     @objc
     func stopTimer() {
         print("Stop")
+        subscription?.cancel()
     }
 }
 
