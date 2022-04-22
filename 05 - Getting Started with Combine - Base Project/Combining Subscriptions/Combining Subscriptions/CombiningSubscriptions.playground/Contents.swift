@@ -6,7 +6,7 @@ import Combine
  *
  */
 
-let meals: Publishers.Sequence<[String?], Never> = ["🍔", "🌭", "🍕", nil].publisher
+let meals: Publishers.Sequence<[String?], Never> = ["🍔", "🌭", "🍕", "🥘"].publisher
 let people: Publishers.Sequence<[String?], Never> = ["Tunde", "Bob", "Toyo", "Jack"].publisher
 
 // Never = never fails
@@ -37,10 +37,19 @@ func validate(person: String?, meal: String?) throws -> String {
 }
 let subscription = people
     .zip(meals) // Combine meals and people
-    .filter({ $0 != nil && $1 != nil}) // Filter out the nils
+    .tryMap({ try validate(person: $0, meal: $1) })
+//    .filter({ $0 != nil && $1 != nil}) // Filter out the nils
     .sink { completion in
-        print("Subscription: \(completion)") // Print out completion of subscription
-    } receiveValue: { (person, meal) in // Have access to person and meal from RecVal
-        print("\(person) enjoys \(meal)") // Listen to what they emit, create custom string
+        switch completion {
+        case .finished:
+            print("Finished")
+        case .failure(let error as PersonError):
+            print("Failed: \(error.errorDescription)")
+        case .failure(let error):
+            print("Failed: \(error.localizedDescription)")
+        }
+//        print("Subscription: \(completion)") // Print out completion of subscription
+    } receiveValue: { (message) in // Have access to person and meal from RecVal
+        print(message) // Listen to what they emit, create custom string
     }
 }
