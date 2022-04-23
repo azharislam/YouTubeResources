@@ -39,14 +39,19 @@ class ViewController: UIViewController {
         return stackVw
     }()
     
+    private lazy var accountViewModel = AccountsViewModel() // Changed it to lazy so we can inject it into CVC below, only init when we use it
+    private lazy var  commentsViewModel = CommentsViewModel(manager: accountViewModel)
+    private var subscription = Set<AnyCancellable>()
+    
     override func loadView() {
         super.loadView()
         setup()
+        accountSubscription()
     }
     
     @objc
     func commentDidTouch() {
-        
+        commentsViewModel.send(comment: commentTxtVw.text)
     }
 }
 
@@ -70,5 +75,18 @@ private extension ViewController {
             formContainerStackVw.bottomAnchor.constraint(equalTo: view.bottomAnchor,
                                                          constant: -44)
         ])
+    }
+    
+    func accountSubscription() {
+        
+        accountViewModel
+            .userAccountStatus // Can't change this, thats why its set in VM
+            .sink { [weak self] status in
+                guard let self = self else { return }
+                if status == .banned {
+                    self.showBlocked()
+                }
+            }
+            .store(in: &subscription)
     }
 }
