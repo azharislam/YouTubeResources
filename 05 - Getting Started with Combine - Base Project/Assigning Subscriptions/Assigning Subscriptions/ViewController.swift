@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
 
@@ -24,10 +25,13 @@ class ViewController: UIViewController {
         lbl.font = .systemFont(ofSize: 24, weight: .semibold)
         return lbl
     }()
+    
+    private var subscriptions = Set<AnyCancellable>()
         
     override func loadView() {
         super.loadView()
         setup()
+        setupSubscriptions()
     }
 }
 
@@ -50,5 +54,16 @@ private extension ViewController {
             textLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                               constant: -8)
         ])
+    }
+    
+    func setupSubscriptions() {
+        
+        NotificationCenter
+            .default // Get default NC
+            .publisher(for: UITextField.textDidChangeNotification, object: inputTxtField) // Get publisher for it, listen for textdidchange on textfield
+            .compactMap({ ($0.object as? UITextField)?.text }) // Get text from textfield and acces property, no nils because its compactMap
+            .map { "The user entered \($0)" } // Flatten value into a string
+            .assign(to: \.text, on: textLbl) // Assign the value to textLabel on the text property
+            .store(in: &subscriptions) // & is in and out property
     }
 }
