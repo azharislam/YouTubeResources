@@ -14,6 +14,7 @@
 		64F9775226261BC000103463 /* Handling_Publishers_in_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9775126261BC000103463 /* Handling_Publishers_in_SwiftUIApp.swift */; };
 		64F9775626261BC100103463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64F9775526261BC100103463 /* Assets.xcassets */; };
 		64F9775926261BC100103463 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64F9775826261BC100103463 /* Preview Assets.xcassets */; };
+		D02572A928147F0E004F1C1B /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02572A828147F0E004F1C1B /* ContactsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		64F9775526261BC100103463 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64F9775826261BC100103463 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		64F9775A26261BC100103463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D02572A828147F0E004F1C1B /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		64F9775026261BC000103463 /* Handling Publishers in SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				D02572A728147F03004F1C1B /* View Model */,
 				64769A9C262D6524008FC75A /* Model */,
 				64769A90262D61C9008FC75A /* Views */,
 				64F9775126261BC000103463 /* Handling_Publishers_in_SwiftUIApp.swift */,
@@ -92,6 +95,14 @@
 				64F9775826261BC100103463 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D02572A728147F03004F1C1B /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				D02572A828147F0E004F1C1B /* ContactsViewModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64769A9E262D6536008FC75A /* Contact.swift in Sources */,
+				D02572A928147F0E004F1C1B /* ContactsViewModel.swift in Sources */,
 				64769AA7262D6DF4008FC75A /* ContactView.swift in Sources */,
 				64769A96262D61FD008FC75A /* ContactsView.swift in Sources */,
 				64769A9A262D64A0008FC75A /* AddContactsView.swift in Sources */,

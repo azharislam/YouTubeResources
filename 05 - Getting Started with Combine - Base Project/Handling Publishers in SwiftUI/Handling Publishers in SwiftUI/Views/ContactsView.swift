@@ -10,12 +10,17 @@ import SwiftUI
 struct ContactsView: View {
     
     @State private var isPresented = false
+    @ObservedObject private var viewModel = ContactsViewModel()
+    
+    // Used ObservedObject so we can observe the property through different views
     
     var body: some View {
         
         NavigationView {
             
             VStack {
+                
+                if viewModel.contacts.isEmpty {
                 
                 Text("No Contacts")
                     .font(.system(size: 16,
@@ -26,7 +31,16 @@ struct ContactsView: View {
                                   weight: .regular))
                     .padding(.horizontal, 16)
                     .padding(.top, 4)
-                
+                } else {
+                    
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.flexible())], spacing: 8) {
+                            ForEach(viewModel.contacts) { contact in
+                                ContactView(contact: contact)
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle("Contacts")
             .navigationBarItems(trailing: Button(action: {
@@ -36,7 +50,7 @@ struct ContactsView: View {
             }))
             .sheet(isPresented: $isPresented,
                    content: {
-                    AddContactsView(isPresented: $isPresented)
+                AddContactsView(viewModel: viewModel, isPresented: $isPresented)
             })
         }
     }
