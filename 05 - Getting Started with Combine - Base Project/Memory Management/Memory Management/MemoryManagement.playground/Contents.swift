@@ -27,8 +27,11 @@ class AccountViewModel {
     init() {
         
         user
-         .map(\.status)
-         .assign(to: \.accountState, on: self)
+         .map(\.status) // Assign status of accountState to self
+//         .assign(to: \.accountState, on: self) // Retain cycle so no way to dispose of it
+         .sink{ [weak self] val in // Do weak self and sink so retain cycle isn't created
+             self?.accountState = val
+         }
          .store(in: &subscriptions)
     }
     
@@ -36,3 +39,9 @@ class AccountViewModel {
         print("deinit released AccountViewModel")
     }
 }
+
+var viewModel: AccountViewModel? = AccountViewModel()
+
+viewModel?.user.value.status = .inactive
+
+viewModel = nil
