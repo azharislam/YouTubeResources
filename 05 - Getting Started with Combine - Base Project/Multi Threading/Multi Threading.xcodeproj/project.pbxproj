@@ -13,6 +13,7 @@
 		64F976F626261AA400103463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64F976F426261AA400103463 /* Main.storyboard */; };
 		64F976F826261AA400103463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64F976F726261AA400103463 /* Assets.xcassets */; };
 		64F976FB26261AA400103463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64F976F926261AA400103463 /* LaunchScreen.storyboard */; };
+		D02572A628146D57004F1C1B /* ImageDownloaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02572A528146D57004F1C1B /* ImageDownloaderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		64F976F726261AA400103463 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64F976FA26261AA400103463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64F976FC26261AA400103463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D02572A528146D57004F1C1B /* ImageDownloaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		64F976ED26261AA400103463 /* Multi Threading */ = {
 			isa = PBXGroup;
 			children = (
+				D02572A428146D3E004F1C1B /* ViewModel */,
 				64F976EE26261AA400103463 /* AppDelegate.swift */,
 				64F976F026261AA400103463 /* SceneDelegate.swift */,
 				64F976F226261AA400103463 /* ViewController.swift */,
@@ -65,6 +68,14 @@
 				64F976FC26261AA400103463 /* Info.plist */,
 			);
 			path = "Multi Threading";
+			sourceTree = "<group>";
+		};
+		D02572A428146D3E004F1C1B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D02572A528146D57004F1C1B /* ImageDownloaderViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 				64F976F326261AA400103463 /* ViewController.swift in Sources */,
 				64F976EF26261AA400103463 /* AppDelegate.swift in Sources */,
 				64F976F126261AA400103463 /* SceneDelegate.swift in Sources */,
+				D02572A628146D57004F1C1B /* ImageDownloaderViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
